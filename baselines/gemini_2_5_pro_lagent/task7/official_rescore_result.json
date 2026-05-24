@@ -1,0 +1,59 @@
+{
+    "gpt_score": 0.0,
+    "sample_scores": [
+        0.0
+    ],
+    "details": [
+        {
+            "sample_index": 0,
+            "score": 0.0,
+            "nodes": [
+                {
+                    "id": "cp1-1",
+                    "score": 0,
+                    "analysis": "The final answer is an error message indicating the agent failed to produce a response. No PDF, narrative, or any required content was delivered."
+                },
+                {
+                    "id": "cp1-2",
+                    "score": 0,
+                    "analysis": "The final answer is an error message indicating no output was generated. No PDF, terrain elevation contour map, or any other required deliverable was produced."
+                },
+                {
+                    "id": "cp1-3",
+                    "score": 0,
+                    "analysis": "The final answer is an error message indicating no output was generated. No PDF, annotated map images, or any other deliverables were produced, so the checkpoint requirement is completely unmet."
+                },
+                {
+                    "id": "cp1-4",
+                    "score": 0,
+                    "analysis": "The final answer is an error message indicating no output was produced. No PDF, timeline chart, or any other required deliverable was generated."
+                },
+                {
+                    "id": "cp1-5",
+                    "score": 0.0,
+                    "analysis": "regex fallback"
+                },
+                {
+                    "id": "cp2-1",
+                    "score": 0,
+                    "analysis": "The final answer is an error message indicating no PDF or any other deliverable was produced. Required files, including the PDF with the distance computation table, are completely missing."
+                },
+                {
+                    "id": "cp3-1",
+                    "score": 0,
+                    "analysis": "The final answer is an error message indicating no deliverable was produced. No PDF, maps, timeline, or fact-check summary exist to evaluate against the checkpoint requirement."
+                },
+                {
+                    "id": "cp3-2",
+                    "score": 0.0,
+                    "analysis": "regex fallback"
+                },
+                {
+                    "id": "cp3-3",
+                    "score": 0,
+                    "analysis": "No final PDF or any deliverable files were produced. The agent exceeded its turn limit without generating the required report, maps, or summary. Without the document, historical terminology accuracy cannot be verified."
+                }
+            ]
+        }
+    ]
+}

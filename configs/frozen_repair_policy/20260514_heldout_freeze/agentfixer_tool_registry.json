@@ -1,0 +1,125 @@
+{
+  "schema_version": "0.1",
+  "source": "AgentFixer: From Failure Detection to Fix Recommendations in LLM Agentic Systems (AGENT 2026 workshop)",
+  "tool_groups": [
+    {
+      "name": "input_prompt_compliance",
+      "tools": [
+        {
+          "name": "Input-Schema-Non-compliance-Detector",
+          "mode": "llm",
+          "description": "Check whether user input satisfies the schema specified by the system prompt."
+        },
+        {
+          "name": "Input-Instructions-Non-compliance-Detector",
+          "mode": "llm",
+          "description": "Check whether user input follows the system-prompt instructions."
+        },
+        {
+          "name": "Input-Format-Violation-Detector",
+          "mode": "llm",
+          "description": "Check whether user input obeys format constraints."
+        }
+      ]
+    },
+    {
+      "name": "system_prompt_analysis",
+      "tools": [
+        {
+          "name": "Prompt-Consistency-Validator: internal contradictions",
+          "mode": "llm",
+          "description": "Detect contradictions inside the system prompt."
+        },
+        {
+          "name": "Prompt-Consistency-Validator: example misalignment",
+          "mode": "llm",
+          "description": "Detect inconsistency between few-shot examples and task requirements."
+        },
+        {
+          "name": "Edge-Case-Instruction-Validator",
+          "mode": "llm",
+          "description": "Detect missing edge-case coverage in the system prompt."
+        },
+        {
+          "name": "Few-Shot-Coverage-Validator",
+          "mode": "llm",
+          "description": "Detect coverage gaps in the few-shot examples."
+        }
+      ]
+    },
+    {
+      "name": "output_prompt_compliance",
+      "tools": [
+        {
+          "name": "Output-Schema-Non-compliance-Detector",
+          "mode": "llm",
+          "description": "Check whether the response output matches the required schema."
+        },
+        {
+          "name": "Output-Instructions-Non-compliance-Detector",
+          "mode": "llm",
+          "description": "Check whether the response follows output instructions."
+        },
+        {
+          "name": "Output-Format-Violation-Detector",
+          "mode": "llm",
+          "description": "Check whether the response follows the required output format."
+        }
+      ]
+    },
+    {
+      "name": "token_level_anomalies",
+      "tools": [
+        {
+          "name": "Unusual-Token-Detector",
+          "mode": "rule",
+          "description": "Detect unusual characters and encoding issues in the output."
+        },
+        {
+          "name": "Token-Repetition-Detector",
+          "mode": "rule",
+          "description": "Detect excessive repetition patterns."
+        }
+      ]
+    },
+    {
+      "name": "python_code_validation",
+      "tools": [
+        {
+          "name": "Python-Code-Syntax-Validator",
+          "mode": "rule",
+          "description": "Check syntax and basic structural integrity of Python code segments."
+        }
+      ]
+    },
+    {
+      "name": "cross_stage_information_consistency",
+      "tools": [
+        {
+          "name": "Information-Consistency-Validator",
+          "mode": "rule",
+          "description": "Check for truncation, modification, or hallucination of explicit information."
+        },
+        {
+          "name": "Reasoning-Action-Mismatch-Detector",
+          "mode": "llm",
+          "description": "Detect discrepancies between reasoning and final action or conclusion."
+        }
+      ]
+    }
+  ],
+  "root_cause_tools": [
+    {
+      "name": "LLM-as-a-judge single-trace root cause tool",
+      "mode": "llm",
+      "input": ["system_prompt", "user_input", "trajectory", "detector_outputs"],
+      "output": ["root_cause", "severity", "recommendation"]
+    },
+    {
+      "name": "comparison / meta root cause tool",
+      "mode": "llm",
+      "input": ["successful_trace", "failed_trace", "detector_outputs"],
+      "output": ["differences", "root_cause", "recommendation"]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document</title>
+    <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.5;margin:2rem;}</style>
+  </head>
+  <body>
+document.addEventListener('DOMContentLoaded', () => {
+    const characters = {
+        harry: {
+            opening: "I solemnly swear that I am up to no good. What secrets do you have to share?",
+            image: "harry.png"
+        },
+        hermione: {
+            opening: "It's levi-O-sa, not levio-SA. Now, tell me something I don't know.",
+            image: "hermione.png"
+        },
+        ron: {
+            opening: "Bloody hell! Another secret? Go on then, but make it quick!",
+            image: "ron.png"
+        },
+        dumbledore: {
+            opening: "It does not do to dwell on dreams and forget to live. What is on your mind?",
+            image: "dumbledore.png"
+        },
+        snape: {
+            opening: "The mind is a complex and many-layered thing. Unburden yours... if you dare.",
+            image: "snape.png"
+        }
+    };
+
+    const characterSelection = document.getElementById('character-selection');
+    const diaryInterface = document.getElementById('diary-interface');
+    const characterImage = document.getElementById('character-image');
+    const openingLine = document.getElementById('opening-line');
+    const avatars = document.querySelectorAll('.avatar');
+
+    avatars.forEach(avatar => {
+        avatar.addEventListener('click', () => {
+            const character = avatar.dataset.character;
+            const characterData = characters[character];
+
+            characterImage.src = characterData.image;
+            openingLine.textContent = characterData.opening;
+
+            characterSelection.classList.add('hidden');
+            diaryInterface.classList.remove('hidden');
+        });
+    });
+});
+  </body>
+</html>

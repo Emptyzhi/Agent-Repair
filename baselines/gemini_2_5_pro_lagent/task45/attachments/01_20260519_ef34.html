@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riddle Diary</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Riddle Diary</h1>
+            <p>Inspired by the world of Harry Potter</p>
+        </header>
+        <main>
+            <section id="character-selection">
+                <h2>Choose a character to begin your diary entry</h2>
+                <div class="avatar-container">
+                    <img src="harry.png" alt="Harry Potter" class="avatar" data-character="harry">
+                    <img src="hermione.png" alt="Hermione Granger" class="avatar" data-character="hermione">
+                    <img src="ron.png" alt="Ron Weasley" class="avatar" data-character="ron">
+                    <img src="dumbledore.png" alt="Albus Dumbledore" class="avatar" data-character="dumbledore">
+                    <img src="snape.png" alt="Severus Snape" class="avatar" data-character="snape">
+                </div>
+            </section>
+            <section id="diary-interface" class="hidden">
+                <div id="character-header">
+                    <img id="character-image" src="" alt="Character Header">
+                </div>
+                <div id="opening-line"></div>
+                <textarea id="diary-entry" placeholder="Tell me your secrets..."></textarea>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

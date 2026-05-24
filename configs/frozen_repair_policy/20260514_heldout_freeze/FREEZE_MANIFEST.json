@@ -1,0 +1,10 @@
+﻿{
+    "created":  "2026-05-14T10:49:21",
+    "files":  [
+                  "repair_module_registry_v2.json",
+                  "synthesize_repair_module_routes.py",
+                  "run_closed_loop_repair_controller.py",
+                  "agentfixer_tool_registry.json"
+              ],
+    "note":  "Frozen before held-out AgentFixer-guided repair. Do not edit registry/router for held-out scoring."
+}

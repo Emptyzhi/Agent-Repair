@@ -1,0 +1,29 @@
+.venv/
+__pycache__/
+*.pyc
+
+# Upstream GTA source and datasets are bootstrapped locally.
+vendor/
+GTA/
+
+# Large GTA-Workflow data files.
+opencompass/data/
+**/gta_workflow_dataset.zip
+**/gta_dataset_v2/
+**/__MACOSX/
+
+# Runtime outputs.
+outputs/
+work_dirs/
+runs/
+agent_app_result*/
+
+# Local IDE / OS noise.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Secrets.
+.env
+*.key

@@ -1,0 +1,411 @@
+{
+  "schema_version": "0.2",
+  "created": "2026-05-11 02:17:34",
+  "modules": [
+    {
+      "module": "EvidenceGroundingRepair",
+      "implementation_hint": "evidence_artifact_completion",
+      "failure_types": [
+        "insufficient_evidence",
+        "weak_source_grounding"
+      ],
+      "input_signals": [
+        "low evidence checkpoint",
+        "evaluator analysis",
+        "missing source-bearing artifacts"
+      ],
+      "output_artifacts": [
+        "evidence notes",
+        "verification checklist",
+        "source-enriched tables"
+      ]
+    },
+    {
+      "module": "SourceSchemaRepair",
+      "implementation_hint": "answer_schema_and_value_repair + official_source_grounding_repair",
+      "failure_types": [
+        "tool/source/format compound failure",
+        "invalid_final_schema"
+      ],
+      "input_signals": [
+        "wrong source",
+        "wrong value",
+        "format mismatch"
+      ],
+      "output_artifacts": [
+        "schema-valid final answer",
+        "official source evidence"
+      ]
+    },
+    {
+      "module": "ArtifactVisibilityRepair",
+      "implementation_hint": "browser_render_verification_repair + non_target_artifact_preservation_repair",
+      "failure_types": [
+        "artifact_visibility_gap"
+      ],
+      "input_signals": [
+        "deliverable exists but is not judge-visible",
+        "missing render proof"
+      ],
+      "output_artifacts": [
+        "render proof",
+        "preservation note",
+        "filled example"
+      ]
+    },
+    {
+      "module": "CulturalCoverageRepair",
+      "implementation_hint": "task24 structured cultural artifact repair",
+      "failure_types": [
+        "cultural concept coverage gap",
+        "artifact realization gap"
+      ],
+      "input_signals": [
+        "missing concept coverage",
+        "low cultural/research checkpoint"
+      ],
+      "output_artifacts": [
+        "glossary",
+        "concept notes",
+        "workflow documentation",
+        "HTML preview"
+      ]
+    },
+    {
+      "module": "MultiArtifactPackageRepair",
+      "implementation_hint": "task57/task65 package generation",
+      "failure_types": [
+        "multi-artifact deliverable realization failure",
+        "intent-only deliverable failure"
+      ],
+      "input_signals": [
+        "final answer promises files",
+        "files absent or incomplete"
+      ],
+      "output_artifacts": [
+        "HTML/CSS package",
+        "PDF",
+        "DOCX/PPTX",
+        "ZIP bundle"
+      ]
+    },
+    {
+      "module": "ReportAssemblyRepair",
+      "implementation_hint": "task98 outlet report artifact repair",
+      "failure_types": [
+        "trajectory to report artifact gap"
+      ],
+      "input_signals": [
+        "partial observations exist",
+        "final report artifact missing"
+      ],
+      "output_artifacts": [
+        "PDF report",
+        "measurements",
+        "image descriptions",
+        "source table"
+      ]
+    },
+    {
+      "module": "MultimodalEvidenceRepair",
+      "implementation_hint": "task122 multimodal math report repair",
+      "failure_types": [
+        "multimodal verification artifact gap"
+      ],
+      "input_signals": [
+        "image-derived expression",
+        "missing verification artifact"
+      ],
+      "output_artifacts": [
+        "LaTeX extraction",
+        "plot",
+        "visual comparison",
+        "DOCX report"
+      ]
+    },
+    {
+      "module": "SelectiveRescoreController",
+      "implementation_hint": "score_candidate_with_official_evaluator + compare_checkpoint_scores",
+      "failure_types": [
+        "post-repair validation"
+      ],
+      "input_signals": [
+        "target checkpoint set",
+        "repaired artifact bundle"
+      ],
+      "output_artifacts": [
+        "checkpoint diff",
+        "non-regression summary"
+      ]
+    },
+    {
+      "module": "SourceGroundedDocumentRepair",
+      "implementation_hint": "planned task66 SEO document repair",
+      "failure_types": [
+        "document artifact package realization failure"
+      ],
+      "input_signals": [
+        "document sections missing",
+        "weak source grounding",
+        "malformed search calls"
+      ],
+      "output_artifacts": [
+        "source-grounded DOCX",
+        "source appendix"
+      ]
+    },
+    {
+      "module": "ChartArtifactRepair",
+      "implementation_hint": "planned chart generation and embedding repair",
+      "failure_types": [
+        "missing chart artifacts",
+        "unmaterialized plot calls"
+      ],
+      "input_signals": [
+        "PNG checkpoint failures",
+        "plot code appears in trace but files absent"
+      ],
+      "output_artifacts": [
+        "ranking chart PNG",
+        "traffic chart PNG",
+        "timeline chart PNG"
+      ]
+    },
+    {
+      "module": "LocalDataExtractionRepair",
+      "implementation_hint": "planned task70 local CSV/Markdown parsing repair",
+      "failure_types": [
+        "local file analysis and report artifact failure"
+      ],
+      "input_signals": [
+        "input files available",
+        "extraction/ranking artifacts absent"
+      ],
+      "output_artifacts": [
+        "parsed data CSV",
+        "ranked_jobs.csv"
+      ]
+    },
+    {
+      "module": "ImageDescriptionRepair",
+      "implementation_hint": "planned image-to-report checkpoint patch",
+      "failure_types": [
+        "single-checkpoint visual description gap",
+        "visual render artifact non-delivery"
+      ],
+      "input_signals": [
+        "input image present",
+        "visual description checkpoint low"
+      ],
+      "output_artifacts": [
+        "image description section",
+        "visual evidence notes"
+      ]
+    },
+    {
+      "module": "VisualAssetGenerationRepair",
+      "implementation_hint": "planned task47 render generation repair",
+      "failure_types": [
+        "visual render artifact non-delivery"
+      ],
+      "input_signals": [
+        "required PNG absent",
+        "render metadata absent"
+      ],
+      "output_artifacts": [
+        "render PNG",
+        "render_summary.json"
+      ]
+    },
+    {
+      "module": "DocumentPackageRepair",
+      "implementation_hint": "planned DOCX/PDF packaging repair",
+      "failure_types": [
+        "document artifact package realization failure"
+      ],
+      "input_signals": [
+        "docx/pdf filenames required",
+        "deliverable checkpoint low"
+      ],
+      "output_artifacts": [
+        "DOCX",
+        "PDF",
+        "packaging manifest"
+      ]
+    },
+    {
+      "module": "RankingComputationRepair",
+      "implementation_hint": "planned task70 scoring and ranking repair",
+      "failure_types": [
+        "local file analysis and report artifact failure"
+      ],
+      "input_signals": [
+        "job table plus CV present",
+        "ranked output absent"
+      ],
+      "output_artifacts": [
+        "match score table",
+        "ranked_jobs.csv"
+      ]
+    },
+    {
+      "module": "ReportPatchRepair",
+      "implementation_hint": "planned single-section report patch",
+      "failure_types": [
+        "single-checkpoint visual description gap"
+      ],
+      "input_signals": [
+        "one low checkpoint",
+        "otherwise high report score"
+      ],
+      "output_artifacts": [
+        "patched report section",
+        "patch manifest"
+      ]
+    },
+    {
+      "module": "RenderMetadataRepair",
+      "implementation_hint": "planned visual render metadata repair",
+      "failure_types": [
+        "visual render artifact non-delivery"
+      ],
+      "input_signals": [
+        "render file required",
+        "summary json required"
+      ],
+      "output_artifacts": [
+        "render_summary.json",
+        "style checklist"
+      ]
+    }
+  ],
+  "case_mapping": [
+    {
+      "task_id": 15,
+      "failure_type": "insufficient_evidence",
+      "modules": [
+        "EvidenceGroundingRepair"
+      ],
+      "baseline_score": 8.22,
+      "repaired_score": 10.0,
+      "provider": "DashScope",
+      "model": "qwen3-max",
+      "status": "closed_loop_historical"
+    },
+    {
+      "task_id": 20,
+      "failure_type": "tool/source/format compound failure",
+      "modules": [
+        "SourceSchemaRepair",
+        "EvidenceGroundingRepair"
+      ],
+      "baseline_score": 2.4,
+      "repaired_score": 10.0,
+      "provider": "DashScope",
+      "model": "qwen3-max",
+      "status": "closed_loop_historical"
+    },
+    {
+      "task_id": 22,
+      "failure_type": "artifact_visibility_gap",
+      "modules": [
+        "ArtifactVisibilityRepair"
+      ],
+      "baseline_score": 7.5,
+      "repaired_score": 10.0,
+      "provider": "DashScope",
+      "model": "qwen3-max",
+      "status": "closed_loop_historical"
+    },
+    {
+      "task_id": 24,
+      "failure_type": "artifact realization gap + cultural concept coverage gap",
+      "modules": [
+        "CulturalCoverageRepair",
+        "ArtifactVisibilityRepair"
+      ],
+      "baseline_score": 8.875,
+      "repaired_score": 10.0,
+      "provider": "DeepSeek",
+      "model": "deepseek-v4-pro",
+      "status": "closed_loop_provider_switch"
+    },
+    {
+      "task_id": 57,
+      "failure_type": "multi-artifact deliverable realization failure",
+      "modules": [
+        "MultiArtifactPackageRepair"
+      ],
+      "baseline_score": 1.6666666667,
+      "repaired_score": 10.0,
+      "provider": "DeepSeek",
+      "model": "deepseek-v4-pro",
+      "status": "closed_loop_provider_switch"
+    },
+    {
+      "task_id": 65,
+      "failure_type": "intent-only deliverable failure",
+      "modules": [
+        "MultiArtifactPackageRepair"
+      ],
+      "baseline_score": 0.0,
+      "repaired_score": 10.0,
+      "provider": "DashScope",
+      "model": "qwen3-max",
+      "status": "closed_loop_historical"
+    },
+    {
+      "task_id": 98,
+      "failure_type": "trajectory to report artifact gap",
+      "modules": [
+        "ReportAssemblyRepair"
+      ],
+      "baseline_score": 2.76,
+      "repaired_score": 9.12,
+      "provider": "DashScope",
+      "model": "qwen3-max",
+      "status": "closed_loop_historical"
+    },
+    {
+      "task_id": 122,
+      "failure_type": "multimodal verification artifact gap",
+      "modules": [
+        "MultimodalEvidenceRepair"
+      ],
+      "baseline_score": 2.4,
+      "repaired_score": 9.8,
+      "provider": "DashScope",
+      "model": "qwen3-max",
+      "status": "closed_loop_historical"
+    },
+    {
+      "task_id": 70,
+      "failure_type": "local file analysis and report artifact failure",
+      "modules": [
+        "LocalDataExtractionRepair",
+        "RankingComputationRepair",
+        "ReportAssemblyRepair"
+      ],
+      "baseline_score": 0.46153846153846156,
+      "repaired_score": 10.0,
+      "provider": "DeepSeek",
+      "model": "deepseek-v4-pro",
+      "status": "closed_loop_expansion"
+    },
+    {
+      "task_id": 66,
+      "failure_type": "document artifact package realization failure",
+      "modules": [
+        "SourceGroundedDocumentRepair",
+        "ChartArtifactRepair",
+        "DocumentPackageRepair"
+      ],
+      "baseline_score": 4.8,
+      "repaired_score": 10.0,
+      "provider": "DeepSeek",
+      "model": "deepseek-v4-pro",
+      "status": "closed_loop_expansion"
+    }
+  ],
+  "design_note": "This registry recasts task-specific scripts as reusable failure-type to repair-module mappings. The current implementation is metadata-first; the next code step is to route repairs through a common controller."
+}

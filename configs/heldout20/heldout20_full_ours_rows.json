@@ -1,0 +1,514 @@
+[
+  {
+    "task_id": 7,
+    "status": "generated",
+    "baseline_score": 2.8444444444444446,
+    "final_score": 5.155555555555555,
+    "full_ours_score": 2.8444444444444446,
+    "without_artifact_gate_score": 2.8444444444444446,
+    "without_non_regression_gate_score": 5.155555555555555,
+    "full_ours_accept": false,
+    "without_artifact_gate_accept": false,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "REJECT",
+    "num_collateral_damage": 1,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task7\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task7\\official_rescore_result.json",
+    "route_name": "multi_artifact_package_generation",
+    "routed_modules": [
+      "MultiArtifactPackageRepair"
+    ],
+    "expected_files": [
+      "repaired_report.pdf"
+    ]
+  },
+  {
+    "task_id": 14,
+    "status": "generated",
+    "baseline_score": 4.6923076923076925,
+    "final_score": 4.134615384615385,
+    "full_ours_score": 4.6923076923076925,
+    "without_artifact_gate_score": 4.6923076923076925,
+    "without_non_regression_gate_score": 4.134615384615385,
+    "full_ours_accept": false,
+    "without_artifact_gate_accept": false,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "REJECT",
+    "num_collateral_damage": 6,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task14\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task14\\official_rescore_result.json",
+    "route_name": "multi_artifact_package_generation",
+    "routed_modules": [
+      "MultiArtifactPackageRepair"
+    ],
+    "expected_files": [
+      "Alcohol_Effects_Literature_Review.docx",
+      "repaired_report.pdf"
+    ]
+  },
+  {
+    "task_id": 45,
+    "status": "generated",
+    "baseline_score": 5.233333333333333,
+    "final_score": 10.0,
+    "full_ours_score": 10.0,
+    "without_artifact_gate_score": 10.0,
+    "without_non_regression_gate_score": 10.0,
+    "full_ours_accept": true,
+    "without_artifact_gate_accept": true,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "ACCEPT",
+    "num_collateral_damage": 0,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task45\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task45\\official_rescore_result.json",
+    "route_name": "multi_artifact_package_generation",
+    "routed_modules": [
+      "MultiArtifactPackageRepair"
+    ],
+    "expected_files": [
+      "index.html",
+      "repaired_report.pdf"
+    ]
+  },
+  {
+    "task_id": 61,
+    "status": "generated",
+    "baseline_score": 2.75,
+    "final_score": 6.486111111111111,
+    "full_ours_score": 2.75,
+    "without_artifact_gate_score": 2.75,
+    "without_non_regression_gate_score": 6.486111111111111,
+    "full_ours_accept": false,
+    "without_artifact_gate_accept": false,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "REJECT",
+    "num_collateral_damage": 0,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task61\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task61\\official_rescore_result.json",
+    "route_name": "multi_artifact_package_generation",
+    "routed_modules": [
+      "MultiArtifactPackageRepair"
+    ],
+    "expected_files": [
+      "repaired_report.docx",
+      "repaired_report.pdf",
+      "repaired_deck.pptx"
+    ]
+  },
+  {
+    "task_id": 62,
+    "status": "generated",
+    "baseline_score": 8.813333333333333,
+    "final_score": 6.808333333333333,
+    "full_ours_score": 8.813333333333333,
+    "without_artifact_gate_score": 8.813333333333333,
+    "without_non_regression_gate_score": 6.808333333333333,
+    "full_ours_accept": false,
+    "without_artifact_gate_accept": false,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "REJECT",
+    "num_collateral_damage": 4,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task62\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task62\\official_rescore_result.json",
+    "route_name": "preservation_patch",
+    "routed_modules": [
+      "NonRegressionPreservation"
+    ],
+    "expected_files": [
+      "index.html",
+      "Liziqi_FanClub_Spec.pdf"
+    ]
+  },
+  {
+    "task_id": 71,
+    "status": "generated",
+    "baseline_score": 7.9333333333333345,
+    "final_score": 7.2,
+    "full_ours_score": 7.9333333333333345,
+    "without_artifact_gate_score": 7.9333333333333345,
+    "without_non_regression_gate_score": 7.2,
+    "full_ours_accept": false,
+    "without_artifact_gate_accept": false,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "REJECT",
+    "num_collateral_damage": 1,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task71\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task71\\official_rescore_result.json",
+    "route_name": "multi_artifact_package_generation",
+    "routed_modules": [
+      "MultiArtifactPackageRepair"
+    ],
+    "expected_files": [
+      "Meeting_Briefing.docx"
+    ]
+  },
+  {
+    "task_id": 79,
+    "status": "generated",
+    "baseline_score": 10.0,
+    "final_score": 10.0,
+    "full_ours_score": 10.0,
+    "without_artifact_gate_score": 10.0,
+    "without_non_regression_gate_score": 10.0,
+    "full_ours_accept": false,
+    "without_artifact_gate_accept": false,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "REJECT",
+    "num_collateral_damage": 0,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task79\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task79\\official_rescore_result.json",
+    "route_name": "document_package_generation",
+    "routed_modules": [
+      "SourceGroundedDocumentRepair",
+      "DocumentPackageRepair"
+    ],
+    "expected_files": [
+      "repaired_report.pdf"
+    ]
+  },
+  {
+    "task_id": 82,
+    "status": "generated",
+    "baseline_score": 0.0,
+    "final_score": 10.0,
+    "full_ours_score": 10.0,
+    "without_artifact_gate_score": 10.0,
+    "without_non_regression_gate_score": 10.0,
+    "full_ours_accept": true,
+    "without_artifact_gate_accept": true,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "ACCEPT",
+    "num_collateral_damage": 0,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task82\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task82\\official_rescore_result.json",
+    "route_name": "multi_artifact_package_generation",
+    "routed_modules": [
+      "MultiArtifactPackageRepair"
+    ],
+    "expected_files": [
+      "repaired_report.docx",
+      "index.html"
+    ]
+  },
+  {
+    "task_id": 88,
+    "status": "skip_high_baseline",
+    "baseline_score": 9.9,
+    "final_score": 9.9,
+    "full_ours_score": 9.9,
+    "without_artifact_gate_score": 9.9,
+    "without_non_regression_gate_score": 9.9,
+    "artifact_gate_decision": "BASELINE_RETAINED",
+    "non_regression_decision": "BASELINE_RETAINED",
+    "candidate_dir": "",
+    "note": "Baseline retained because frozen registry marks artifact-ok high baseline."
+  },
+  {
+    "task_id": 90,
+    "status": "generated",
+    "baseline_score": 9.529411764705882,
+    "final_score": 8.176470588235293,
+    "full_ours_score": 9.529411764705882,
+    "without_artifact_gate_score": 9.529411764705882,
+    "without_non_regression_gate_score": 8.176470588235293,
+    "full_ours_accept": false,
+    "without_artifact_gate_accept": false,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "REJECT",
+    "num_collateral_damage": 6,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task90\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task90\\official_rescore_result.json",
+    "route_name": "document_package_generation",
+    "routed_modules": [
+      "SourceGroundedDocumentRepair",
+      "DocumentPackageRepair"
+    ],
+    "expected_files": [
+      "repaired_report.pdf"
+    ]
+  },
+  {
+    "task_id": 92,
+    "status": "generated",
+    "baseline_score": 1.2916666666666667,
+    "final_score": 5.5,
+    "full_ours_score": 1.2916666666666667,
+    "without_artifact_gate_score": 1.2916666666666667,
+    "without_non_regression_gate_score": 5.5,
+    "full_ours_accept": false,
+    "without_artifact_gate_accept": false,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "REJECT",
+    "num_collateral_damage": 0,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task92\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task92\\official_rescore_result.json",
+    "route_name": "multi_artifact_package_generation",
+    "routed_modules": [
+      "MultiArtifactPackageRepair"
+    ],
+    "expected_files": [
+      "repaired_table.csv",
+      "repaired_report.pdf"
+    ]
+  },
+  {
+    "task_id": 94,
+    "status": "generated",
+    "baseline_score": 9.7,
+    "final_score": 8.991666666666667,
+    "full_ours_score": 9.7,
+    "without_artifact_gate_score": 9.7,
+    "without_non_regression_gate_score": 8.991666666666667,
+    "full_ours_accept": false,
+    "without_artifact_gate_accept": false,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "REJECT",
+    "num_collateral_damage": 5,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task94\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task94\\official_rescore_result.json",
+    "route_name": "document_package_generation",
+    "routed_modules": [
+      "SourceGroundedDocumentRepair",
+      "DocumentPackageRepair"
+    ],
+    "expected_files": [
+      "room_cable_lengths.csv",
+      "repaired_report.pdf"
+    ]
+  },
+  {
+    "task_id": 98,
+    "status": "existing_candidate_replayed",
+    "baseline_score": 2.176470588235294,
+    "final_score": 8.117647058823529,
+    "full_ours_score": 8.117647058823529,
+    "without_artifact_gate_score": 8.117647058823529,
+    "without_non_regression_gate_score": 8.117647058823529,
+    "full_ours_accept": true,
+    "without_artifact_gate_accept": true,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "ACCEPT",
+    "num_collateral_damage": 0,
+    "candidate_dir": "G:\\project\\GTA-2\\runs\\task98_closed_loop\\20260512_055023\\structured",
+    "rescore_result": "runs\\heldout20_partial_full_ours_controller\\task98_heldout20_partial_full_ours_existing_candidate_20260515_130136\\official_rescore_result.json",
+    "route_name": "existing_task_specific_candidate",
+    "routed_modules": "existing_task_specific_candidate",
+    "expected_files": ""
+  },
+  {
+    "task_id": 108,
+    "status": "generated",
+    "baseline_score": 8.277777777777779,
+    "final_score": 10.0,
+    "full_ours_score": 10.0,
+    "without_artifact_gate_score": 10.0,
+    "without_non_regression_gate_score": 10.0,
+    "full_ours_accept": true,
+    "without_artifact_gate_accept": true,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "ACCEPT",
+    "num_collateral_damage": 0,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task108\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task108\\official_rescore_result.json",
+    "route_name": "preservation_patch",
+    "routed_modules": [
+      "NonRegressionPreservation"
+    ],
+    "expected_files": [
+      "repaired_report.docx",
+      "repaired_report.pdf"
+    ]
+  },
+  {
+    "task_id": 111,
+    "status": "generated",
+    "baseline_score": 3.0833333333333335,
+    "final_score": 9.5,
+    "full_ours_score": 9.5,
+    "without_artifact_gate_score": 9.5,
+    "without_non_regression_gate_score": 9.5,
+    "full_ours_accept": true,
+    "without_artifact_gate_accept": true,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "ACCEPT",
+    "num_collateral_damage": 0,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task111\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task111\\official_rescore_result.json",
+    "route_name": "multi_artifact_package_generation",
+    "routed_modules": [
+      "MultiArtifactPackageRepair"
+    ],
+    "expected_files": [
+      "repaired_report.docx"
+    ]
+  },
+  {
+    "task_id": 121,
+    "status": "generated",
+    "baseline_score": 1.0909090909090908,
+    "final_score": 10.0,
+    "full_ours_score": 10.0,
+    "without_artifact_gate_score": 10.0,
+    "without_non_regression_gate_score": 10.0,
+    "full_ours_accept": true,
+    "without_artifact_gate_accept": true,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "ACCEPT",
+    "num_collateral_damage": 0,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task121\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task121\\official_rescore_result.json",
+    "route_name": "multi_artifact_package_generation",
+    "routed_modules": [
+      "MultiArtifactPackageRepair"
+    ],
+    "expected_files": [
+      "index.html"
+    ]
+  },
+  {
+    "task_id": 122,
+    "status": "existing_candidate_replayed",
+    "baseline_score": 8.466666666666667,
+    "final_score": 9.7,
+    "full_ours_score": 9.7,
+    "without_artifact_gate_score": 9.7,
+    "without_non_regression_gate_score": 9.7,
+    "full_ours_accept": true,
+    "without_artifact_gate_accept": true,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "ACCEPT",
+    "num_collateral_damage": 0,
+    "candidate_dir": "G:\\project\\GTA-2\\runs\\task122_closed_loop\\20260510_203722\\structured",
+    "rescore_result": "runs\\heldout20_partial_full_ours_controller\\task122_heldout20_partial_full_ours_existing_candidate_20260515_130221\\official_rescore_result.json",
+    "route_name": "existing_task_specific_candidate",
+    "routed_modules": "existing_task_specific_candidate",
+    "expected_files": ""
+  },
+  {
+    "task_id": 127,
+    "status": "generated",
+    "baseline_score": 7.904761904761905,
+    "final_score": 9.142857142857142,
+    "full_ours_score": 7.904761904761905,
+    "without_artifact_gate_score": 7.904761904761905,
+    "without_non_regression_gate_score": 9.142857142857142,
+    "full_ours_accept": false,
+    "without_artifact_gate_accept": false,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "REJECT",
+    "num_collateral_damage": 2,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task127\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task127\\official_rescore_result.json",
+    "route_name": "preservation_patch",
+    "routed_modules": [
+      "NonRegressionPreservation"
+    ],
+    "expected_files": [
+      "Image_Rendering_Analysis.pdf"
+    ]
+  },
+  {
+    "task_id": 133,
+    "status": "generated",
+    "baseline_score": 5.7894736842105265,
+    "final_score": 8.68421052631579,
+    "full_ours_score": 8.68421052631579,
+    "without_artifact_gate_score": 8.68421052631579,
+    "without_non_regression_gate_score": 8.68421052631579,
+    "full_ours_accept": true,
+    "without_artifact_gate_accept": true,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "ACCEPT",
+    "num_collateral_damage": 0,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task133\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task133\\official_rescore_result.json",
+    "route_name": "multi_artifact_package_generation",
+    "routed_modules": [
+      "MultiArtifactPackageRepair"
+    ],
+    "expected_files": [
+      "repaired_report.docx"
+    ]
+  },
+  {
+    "task_id": 151,
+    "status": "generated",
+    "baseline_score": 4.42016806722689,
+    "final_score": 8.126050420168067,
+    "full_ours_score": 8.126050420168067,
+    "without_artifact_gate_score": 8.126050420168067,
+    "without_non_regression_gate_score": 8.126050420168067,
+    "full_ours_accept": true,
+    "without_artifact_gate_accept": true,
+    "without_non_regression_gate_accept": true,
+    "artifact_gate_decision": "ACCEPT",
+    "artifact_score": 1.0,
+    "artifact_false_high": false,
+    "non_regression_decision": "ACCEPT",
+    "num_collateral_damage": 0,
+    "candidate_dir": "runs\\heldout20_full_ours_generated\\20260515_131004\\task151\\candidate",
+    "rescore_result": "runs\\heldout20_full_ours_generated\\20260515_131004\\task151\\official_rescore_result.json",
+    "route_name": "multi_artifact_package_generation",
+    "routed_modules": [
+      "MultiArtifactPackageRepair"
+    ],
+    "expected_files": [
+      "repaired_table.csv",
+      "Stalin_Statue_Analysis.pdf"
+    ]
+  }
+]

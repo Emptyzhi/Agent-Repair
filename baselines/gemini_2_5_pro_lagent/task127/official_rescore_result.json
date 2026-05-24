@@ -1,0 +1,49 @@
+{
+    "gpt_score": 1.7142857142857142,
+    "sample_scores": [
+        1.7142857142857142
+    ],
+    "details": [
+        {
+            "sample_index": 0,
+            "score": 1.7142857142857142,
+            "nodes": [
+                {
+                    "id": "cp1-1",
+                    "score": 0,
+                    "analysis": "The final answer references a PDF at a specific path, but no file manifest or textual content is provided to verify the report exists or includes the required visual inspection section. Without the actual PDF, the checkpoint cannot be confirmed."
+                },
+                {
+                    "id": "cp1-2",
+                    "score": 0,
+                    "analysis": "The final answer only provides a file path and summary, but no actual report content, embedded image, or cited sources are present in the response. The required technical explanation with three reputable sources is completely missing, making the checkpoint unmet."
+                },
+                {
+                    "id": "cp1-3",
+                    "score": 3.0,
+                    "analysis": "regex fallback"
+                },
+                {
+                    "id": "cp1-4",
+                    "score": 0.0,
+                    "analysis": "regex fallback"
+                },
+                {
+                    "id": "cp2-1",
+                    "score": 10,
+                    "analysis": "The PDF report is generated with the correct title, includes the original image, and covers all required sections: visual inspection, technical explanation with sources, reproduction steps, and recommendations. The file is confirmed readable and meets all task specifications."
+                },
+                {
+                    "id": "cp2-2",
+                    "score": 0.0,
+                    "analysis": "regex fallback"
+                },
+                {
+                    "id": "cp3",
+                    "score": 0.0,
+                    "analysis": "regex fallback"
+                }
+            ]
+        }
+    ]
+}

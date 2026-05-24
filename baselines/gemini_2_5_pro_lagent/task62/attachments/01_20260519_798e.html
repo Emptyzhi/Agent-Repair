@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liziqi Fan Club</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home" class="logo">Liziqi Fan Club</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h1>Welcome to the Liziqi Fan Club</h1>
+            <p>Celebrating the beauty of traditional Chinese culture and craftsmanship.</p>
+            <img src="https://placehold.co/1200x600/8B4513/FFFFFF?text=Liziqi+in+her+element" alt="Liziqi in a beautiful natural setting">
+        </section>
+
+        <section id="about">
+            <h2>About Liziqi</h2>
+            <p>Liziqi is a Chinese food and country-life vlogger, and entrepreneur. She is known for creating food and handicraft preparation videos in her hometown of Mianyang, Sichuan, often from basic ingredients and tools using traditional Chinese techniques.</p>
+            <img src="https://placehold.co/1200x600/D2B48C/FFFFFF?text=Liziqi+working+on+a+craft" alt="Liziqi working on a traditional craft">
+        </section>
+
+        <section id="gallery">
+            <h2>Gallery</h2>
+            <div class="gallery-grid">
+                <img src="https://placehold.co/400x300/A0522D/FFFFFF?text=Scenic+view+1" alt="Scenic view of Liziqi's village">
+                <img src="https://placehold.co/400x300/CD853F/FFFFFF?text=Handmade+craft+1" alt="Handmade craft by Liziqi">
+                <img src="https://placehold.co/400x300/8FBC8F/FFFFFF?text=Delicious+dish+1" alt="A delicious dish prepared by Liziqi">
+                <img src="https://placehold.co/400x300/6B8E23/FFFFFF?text=Liziqi+with+animals" alt="Liziqi with her farm animals">
+                <img src="https://placehold.co/400x300/556B2F/FFFFFF?text=Seasonal+harvest" alt="Seasonal harvest from the garden">
+                <img src="https://placehold.co/400x300/BDB76B/FFFFFF?text=Traditional+tools" alt="Traditional tools used by Liziqi">
+            </div>
+        </section>
+
+        <section id="videos">
+            <h2>Videos</h2>
+            <div class="video-grid">
+                <div class="video-item">
+                    <iframe src="https://www.youtube.com/embed/J9cT_m5_yS4" frameborder="0" allowfullscreen></iframe>
+                    <p>The Life of Garlic</p>
+                </div>
+                <div class="video-item">
+                    <iframe src="https://www.youtube.com/embed/vX4Qpbut7W4" frameborder="0" allowfullscreen></iframe>
+                    <p>The Life of a Strawberry</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message"></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Liziqi Fan Club. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+{
+  "0": {
+    "gold": [
+      []
+    ],
+    "prediction": [
+      [
+        {
+          "role": "assistant",
+          "content": "Of course. To begin, please provide me with the names and company affiliations of all meeting participants."
+        }
+      ]
+    ],
+    "origin_prompt": [
+      "Prepare a complete briefing for the upcoming business meeting. Begin by researching each participant and their organization on the web, gathering recent news, notable achievements, professional background, and current business activities, and note any missing or uncertain information for later follow‑up. Next, develop a summary of the industry landscape relevant to the meeting, identifying key trends, challenges, and opportunities, and produce at least one visual chart such as a line or bar graph to illustrate quantitative data, while flagging any data gaps that require additional research. Using the profiles and industry analysis, formulate a set of strategic talking points, critical questions, and discussion angles, performing any necessary numeric calculations such as market‑size percentages, and ensure each point directly relates to the participant’s interests or the identified industry opportunities. Compile all findings into a single, professionally formatted briefing document in DOCX format, titled \"Meeting_Briefing.docx\", that includes participant biographies (name, role, company, key facts), an industry overview with narrative summary and the generated chart, a concise list of talking points, questions, and suggested discussion pathways, and strategic recommendations for the meeting outcome. Finally, conduct a quality review of the DOCX file to verify completeness, logical flow, and accuracy, revisiting any earlier stage—research, analysis, or strategy—to revise incomplete or unclear sections until the briefing satisfies all requirements."
+    ],
+    "steps": [],
+    "full_tree": [
+      {
+        "id": "cp1",
+        "requirements": "A compiled dossier for each meeting participant and their organization containing recent news, notable achievements, professional background, and current business activities, with any missing or uncertain information clearly flagged for follow‑up.",
+        "weight": 3,
+        "sub_tasks": [
+          {
+            "id": "cp1-1",
+            "requirements": "Participant and company profiles with sourced recent news, achievements, background, and activity are assembled and documented.",
+            "weight": 2
+          },
+          {
+            "id": "cp1-2",
+            "requirements": "A list of gaps or uncertain items for each profile is identified and highlighted.",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": "cp2",
+        "requirements": "An industry overview report that outlines the current landscape, key trends, challenges, and opportunities, accompanied by a visual chart (line or bar graph) illustrating quantitative data, and any data gaps are marked for further research.",
+        "weight": 3,
+        "sub_tasks": [
+          {
+            "id": "cp2-1",
+            "requirements": "A narrative summary of industry trends, challenges, and opportunities is produced.",
+            "weight": 2
+          },
+          {
+            "id": "cp2-2",
+            "requirements": "Quantitative data visualized in a chart is generated, with missing data points noted.",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": "cp3",
+        "requirements": "A set of strategic talking points, critical questions, and discussion angles, each linked to participant interests or identified industry opportunities, including any calculated market‑size percentages, is compiled.",
+        "weight": 2,
+        "sub_tasks": [
+          {
+            "id": "cp3-1",
+            "requirements": "Strategic talking points, questions, and discussion angles are drafted with explicit connection to participant profiles or industry insights.",
+            "weight": 2
+          },
+          {
+            "id": "cp3-2",
+            "requirements": "All numeric calculations (e.g., market‑size percentages) are presented, and any insufficient rationale is flagged for revision.",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": "cp4",
+        "requirements": "A professionally formatted DOCX briefing document named \"Meeting_Briefing.docx\" that includes participant biographies, industry overview with chart, concise talking points, questions, discussion pathways, and strategic recommendations, passes a quality review confirming completeness, logical flow, and accuracy.",
+        "weight": 2,
+        "sub_tasks": [
+          {
+            "id": "cp4-1",
+            "requirements": "The DOCX file contains all required sections with correct formatting and embedded chart.",
+            "weight": 2
+          },
+          {
+            "id": "cp4-2",
+            "requirements": "A quality review checklist is completed, confirming no missing or unclear content; any issues are corrected.",
+            "weight": 1
+          }
+        ]
+      }
+    ],
+    "attached_files": [],
+    "assistant_outputs": [
+      [
+        {
+          "role": "assistant",
+          "content": "Of course. To begin, please provide me with the names and company affiliations of all meeting participants."
+        }
+      ]
+    ]
+  }
+}

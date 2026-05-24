@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document</title>
+    <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.5;margin:2rem;}</style>
+  </head>
+  <body>
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #2a2a2a;
+    border: 2px solid #c4a66a;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    font-family: 'Lumos', 'Harry P', sans-serif;
+    font-size: 3em;
+    color: #c4a66a;
+    margin-bottom: 10px;
+}
+
+.avatar-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #c4a66a;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #c4a66a;
+}
+
+#diary-interface {
+    margin-top: 30px;
+}
+
+#character-header img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #c4a66a;
+}
+
+#opening-line {
+    font-size: 1.2em;
+    font-style: italic;
+    margin: 20px 0;
+    color: #c4a66a;
+}
+
+#diary-entry {
+    width: 100%;
+    height: 200px;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    border: 1px solid #c4a66a;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1em;
+}
+
+.hidden {
+    display: none;
+}
+  </body>
+</html>

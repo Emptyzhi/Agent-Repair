@@ -200,8 +200,18 @@ def call_llm_json(prompt: str, model: str, max_tokens: int) -> dict[str, Any]:
     if not gemini_key and not api_key:
         raise EnvironmentError("No compatible API key found.")
 
+    def status_code(exc: Exception) -> int | None:
+        response = getattr(exc, "response", None)
+        if response is not None:
+            value = getattr(response, "status_code", None)
+            if isinstance(value, int):
+                return value
+        value = getattr(exc, "status_code", None)
+        return value if isinstance(value, int) else None
+
     last_error: Exception | None = None
-    for attempt in range(1, 5):
+    max_attempts = 8
+    for attempt in range(1, max_attempts + 1):
         try:
             if gemini_key and model.startswith("gemini"):
                 url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_key}"
@@ -278,9 +288,17 @@ def call_llm_json(prompt: str, model: str, max_tokens: int) -> dict[str, Any]:
                 return {"final_answer_markdown": text, "deliverables": {}, "repair_rationale": ["model returned non-json"]}
         except (requests.exceptions.RequestException, APIConnectionError, APITimeoutError, RateLimitError, InternalServerError) as exc:
             last_error = exc
-            if attempt >= 4:
+            code = status_code(exc)
+            if code not in {408, 409, 429, 500, 502, 503, 504} or attempt >= max_attempts:
                 break
-            time.sleep(min(20, 2**attempt))
+            delay = min(300, 20 * attempt) if code in {429, 503} else min(120, 5 * attempt)
+            print(
+                f"[generation retry] model={model} attempt={attempt}/{max_attempts} "
+                f"delay={delay}s error={type(exc).__name__}: {exc}",
+                file=sys.stderr,
+                flush=True,
+            )
+            time.sleep(delay)
 
     raise RuntimeError(f"LLM request failed after retries: {last_error}") from last_error
 

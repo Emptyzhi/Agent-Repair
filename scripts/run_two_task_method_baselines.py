@@ -24,6 +24,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 from statistics import mean
@@ -70,6 +71,24 @@ def first_env(*names: str) -> str:
         if value:
             return value.strip()
     return ""
+
+
+def exception_status_code(exc: Exception) -> int | None:
+    response = getattr(exc, "response", None)
+    if response is not None:
+        status_code = getattr(response, "status_code", None)
+        if isinstance(status_code, int):
+            return status_code
+    status_code = getattr(exc, "status_code", None)
+    return status_code if isinstance(status_code, int) else None
+
+
+def transient_retry_delay(attempt: int, status_code: int | None) -> int | None:
+    if status_code not in {408, 409, 429, 500, 502, 503, 504}:
+        return None
+    if status_code in {429, 503}:
+        return min(300, 20 * attempt)
+    return min(120, 5 * attempt)
 
 
 def registry_rows(path: Path) -> dict[int, dict[str, Any]]:
@@ -385,7 +404,8 @@ def call_gpt_json(prompt: str, image_parts: list[dict[str, Any]], model: str, ma
 
     last_text = ""
     last_error = ""
-    for attempt in range(1, 4):
+    max_attempts = 8
+    for attempt in range(1, max_attempts + 1):
         kwargs: dict[str, Any] = {}
         if attempt == 1:
             kwargs["response_format"] = {"type": "json_object"}
@@ -408,8 +428,16 @@ def call_gpt_json(prompt: str, image_parts: list[dict[str, Any]], model: str, ma
             last_error = f"{type(exc).__name__}: {exc}"
             if image_parts and include_images:
                 continue
-            if attempt >= 3:
+            delay = transient_retry_delay(attempt, exception_status_code(exc))
+            if delay is None or attempt >= max_attempts:
                 raise
+            print(
+                f"[generation retry] model={model} attempt={attempt}/{max_attempts} "
+                f"delay={delay}s error={last_error}",
+                file=sys.stderr,
+                flush=True,
+            )
+            time.sleep(delay)
             continue
         last_text = response.choices[0].message.content or ""
         parsed = extract_first_json_object(last_text)

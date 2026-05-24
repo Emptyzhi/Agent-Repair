@@ -52,7 +52,7 @@ SCRIPTS = ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-from provider_runtime import extract_first_json_object, strip_code_fences  # noqa: E402
+from provider_runtime import extract_first_json_object, gemini_json_completion, strip_code_fences  # noqa: E402
 from run_heldout20_full_ours_candidate_generation import (  # noqa: E402
     dump_json,
     expected_files_from_prediction,
@@ -391,6 +391,17 @@ def call_gpt_json(prompt: str, image_parts: list[dict[str, Any]], model: str, ma
     if not api_key:
         raise EnvironmentError("OPENAI_API_KEY/OPEN_API_KEY/GPT_API_KEY/GPT4O_API_KEY is required.")
     base_url = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
+    if model.startswith("gemini"):
+        return gemini_json_completion(
+            prompt,
+            model,
+            max_tokens,
+            system_prompt="You generate GTA-2 baseline candidate artifacts. Return only valid JSON.",
+            temperature=0.2,
+            image_parts=image_parts,
+            retries=8,
+            timeout=180,
+        )
     default_headers: dict[str, str] = {}
     app_code = first_env("OPENAI_APP_CODE")
     if app_code or "yunwu.ai" in base_url.lower():

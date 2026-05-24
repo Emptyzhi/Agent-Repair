@@ -81,6 +81,8 @@ def yunwu_child_env(scorer_model: str) -> dict[str, str]:
     env["EVAL_OPENAI_BASE_URL"] = "https://yunwu.ai/v1"
     env["EVAL_OPENAI_MODEL"] = scorer_model
     env["EVAL_DEBUG"] = "0"
+    env["YUNWU_GEMINI_NATIVE"] = "1"
+    env["GEMINI_REST_BASE_URL"] = "https://yunwu.ai/v1beta"
     env["PYTHONIOENCODING"] = "utf-8"
     env["_YUNWU_REMOVED_DIRECT_PROVIDER_KEYS"] = ",".join(removed_present)
     return env

@@ -57,6 +57,8 @@ def yunwu_env() -> dict[str, str]:
     env["EVAL_OPENAI_BASE_URL"] = "https://yunwu.ai/v1"
     env["EVAL_OPENAI_MODEL"] = env.get("EVAL_OPENAI_MODEL") or "gpt-5.2"
     env["EVAL_DEBUG"] = "0"
+    env["YUNWU_GEMINI_NATIVE"] = "1"
+    env["GEMINI_REST_BASE_URL"] = "https://yunwu.ai/v1beta"
     env["PYTHONIOENCODING"] = "utf-8"
     return env
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import json
 import os
 import re
@@ -24,7 +25,52 @@ def gemini_key() -> str:
 
 
 def gemini_rest_base_url() -> str:
-    return os.environ.get("GEMINI_REST_BASE_URL", "https://generativelanguage.googleapis.com/v1beta").rstrip("/")
+    explicit = os.environ.get("GEMINI_REST_BASE_URL")
+    if explicit:
+        return explicit.rstrip("/")
+    openai_base = os.environ.get("OPENAI_BASE_URL", "").lower()
+    if "yunwu.ai" in openai_base and os.environ.get("YUNWU_GEMINI_NATIVE", "1") != "0":
+        return "https://yunwu.ai/v1beta"
+    return "https://generativelanguage.googleapis.com/v1beta"
+
+
+def gemini_rest_auth() -> tuple[str, dict[str, str], str]:
+    base_url = gemini_rest_base_url()
+    headers = {"content-type": "application/json"}
+    if "yunwu.ai" in base_url.lower():
+        key = first_env("OPENAI_API_KEY", "OPEN_API_KEY", "GPT_API_KEY", "GPT4O_API_KEY")
+        if not key:
+            raise EnvironmentError("OPENAI_API_KEY/OPEN_API_KEY/GPT_API_KEY/GPT4O_API_KEY is required for Yunwu Gemini native API.")
+        headers["Authorization"] = f"Bearer {key}"
+        app_code = first_env("OPENAI_APP_CODE")
+        if app_code or "yunwu.ai" in base_url.lower():
+            headers["APP-Code"] = app_code or "APP-10012fcb"
+        return base_url, headers, key
+    key = gemini_key()
+    if not key:
+        raise EnvironmentError("GEMINI_API_KEY/gemini_api_key must be set for Google Gemini native API.")
+    return base_url, headers, key
+
+
+def _append_openai_image_parts(parts: list[dict[str, Any]], image_parts: list[dict[str, Any]] | None) -> None:
+    for image_part in image_parts or []:
+        if not isinstance(image_part, dict):
+            continue
+        image_url = image_part.get("image_url") or {}
+        url = image_url.get("url") if isinstance(image_url, dict) else ""
+        if not isinstance(url, str) or not url.startswith("data:"):
+            continue
+        header, _, data = url.partition(",")
+        if not data:
+            continue
+        mime = "image/png"
+        if header.startswith("data:"):
+            mime = header[5:].split(";", 1)[0] or mime
+        try:
+            base64.b64decode(data, validate=True)
+        except Exception:
+            continue
+        parts.append({"inlineData": {"mimeType": mime, "data": data}})
 
 
 def generation_openai_base_url() -> str:
@@ -83,8 +129,20 @@ def extract_first_json_object(text: str) -> dict[str, Any] | None:
 
 def _safe_exception_text(exc: Exception) -> str:
     text = str(exc)
-    key = gemini_key()
-    if key:
+    response = getattr(exc, "response", None)
+    if response is not None:
+        try:
+            body = getattr(response, "text", "")
+            if body:
+                text = f"{text} | {body}"
+        except Exception:
+            pass
+    for key in [
+        gemini_key(),
+        first_env("OPENAI_API_KEY", "OPEN_API_KEY", "GPT_API_KEY", "GPT4O_API_KEY"),
+    ]:
+        if not key:
+            continue
         text = text.replace(key, "<redacted>")
     return text
 
@@ -109,15 +167,16 @@ def gemini_text_completion(
     system_prompt: str = "",
     temperature: float = 0.2,
     response_mime_type: str | None = None,
+    image_parts: list[dict[str, Any]] | None = None,
     retries: int = 8,
     timeout: int = 180,
 ) -> str:
-    key = gemini_key()
-    if not key:
-        raise EnvironmentError("GEMINI_API_KEY/gemini_api_key must be set.")
+    base_url, headers, key = gemini_rest_auth()
 
+    parts: list[dict[str, Any]] = [{"text": prompt}]
+    _append_openai_image_parts(parts, image_parts)
     payload: dict[str, Any] = {
-        "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+        "contents": [{"role": "user", "parts": parts}],
         "generationConfig": {
             "temperature": temperature,
             "maxOutputTokens": max_tokens,
@@ -128,7 +187,9 @@ def gemini_text_completion(
     if response_mime_type:
         payload["generationConfig"]["responseMimeType"] = response_mime_type
 
-    url = f"{gemini_rest_base_url()}/models/{model}:generateContent?key={key}"
+    url = f"{base_url}/models/{model}:generateContent"
+    if "yunwu.ai" not in base_url.lower():
+        url = f"{url}?key={key}"
     last_error = ""
     attempt = 0
     while True:
@@ -136,7 +197,7 @@ def gemini_text_completion(
         try:
             resp = requests.post(
                 url,
-                headers={"content-type": "application/json"},
+                headers=headers,
                 data=json.dumps(payload),
                 timeout=timeout,
             )
@@ -152,8 +213,12 @@ def gemini_text_completion(
         except Exception as exc:
             last_error = _safe_exception_text(exc)
             status_code = _exception_status_code(exc)
+            if status_code == 503 and ("distributor" in last_error or "无可用渠道" in last_error):
+                break
             if status_code in {429, 503}:
-                time.sleep(300)
+                if attempt >= retries:
+                    break
+                time.sleep(min(300, 20 * attempt))
                 continue
             if attempt >= retries:
                 break
@@ -168,6 +233,7 @@ def gemini_json_completion(
     *,
     system_prompt: str = "",
     temperature: float = 0.2,
+    image_parts: list[dict[str, Any]] | None = None,
     retries: int = 4,
     timeout: int = 180,
 ) -> dict[str, Any]:
@@ -178,6 +244,7 @@ def gemini_json_completion(
         system_prompt=system_prompt,
         temperature=temperature,
         response_mime_type="application/json",
+        image_parts=image_parts,
         retries=retries,
         timeout=timeout,
     )

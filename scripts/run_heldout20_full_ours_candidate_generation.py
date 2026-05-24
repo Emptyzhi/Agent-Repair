@@ -35,6 +35,7 @@ from typing import Any
 from openai import OpenAI
 from openai import APIConnectionError, APITimeoutError, InternalServerError, RateLimitError
 import requests
+from provider_runtime import gemini_json_completion
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -213,41 +214,19 @@ def call_llm_json(prompt: str, model: str, max_tokens: int) -> dict[str, Any]:
     max_attempts = 8
     for attempt in range(1, max_attempts + 1):
         try:
-            if gemini_key and model.startswith("gemini"):
-                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_key}"
-                payload = {
-                    "contents": [
-                        {
-                            "role": "user",
-                            "parts": [{"text": prompt}],
-                        }
-                    ],
-                    "generationConfig": {
-                        "temperature": 0.2,
-                        "maxOutputTokens": max_tokens,
-                        "responseMimeType": "application/json",
-                        "thinkingConfig": {"thinkingBudget": 128},
-                    },
-                }
-                resp = requests.post(url, headers={"content-type": "application/json"}, data=json.dumps(payload), timeout=180)
-                resp.raise_for_status()
-                body = resp.json()
-                text = ""
-                candidates = body.get("candidates") or []
-                if candidates:
-                    content = candidates[0].get("content") or {}
-                    parts = content.get("parts") or []
-                    if parts:
-                        text = str(parts[0].get("text", ""))
-                text = re.sub(r"^```[a-zA-Z]*\n?", "", text.strip())
-                text = re.sub(r"\n?```$", "", text.strip())
-                start, end = text.find("{"), text.rfind("}")
-                if start >= 0 and end > start:
-                    text = text[start : end + 1]
-                try:
-                    return json.loads(text)
-                except json.JSONDecodeError:
-                    return {"final_answer_markdown": text, "deliverables": {}, "repair_rationale": ["gemini returned non-json"]}
+            if model.startswith("gemini"):
+                return gemini_json_completion(
+                    prompt,
+                    model,
+                    max_tokens,
+                    system_prompt=(
+                        "You are the frozen GTA-2 full-ours repair executor. "
+                        "Return only valid JSON. Materialize every requested deliverable in the JSON."
+                    ),
+                    temperature=0.2,
+                    retries=8,
+                    timeout=180,
+                )
 
             default_headers: dict[str, str] = {}
             app_code = first_env("OPENAI_APP_CODE")

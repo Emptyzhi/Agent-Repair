@@ -1,4 +1,4 @@
-"""Run method-level baselines for a small held-out task subset.
+"""Run method-level baselines for a held-out task subset.
 
 This runner is intentionally separate from the Full Ours repair pipeline. It
 does not call the repair evaluator, evidence map, patch-preservation controller,
@@ -35,11 +35,13 @@ from openai import OpenAI
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REGISTRY = ROOT / "configs" / "heldout20" / "heldout20_router_registry_gemini.json"
 DEFAULT_SOURCE_DATASET = ROOT / "vendor" / "GTA" / "opencompass" / "data" / "gta_dataset_v2" / "end.json"
-DEFAULT_OUT_ROOT = ROOT / "runs" / "v3.1" / "method_baselines_gpt4o_responses_gpt52_2tasks"
+DEFAULT_OUT_ROOT = ROOT / "runs" / "v3.1" / "method_baselines_yunwu_strict_gta2"
+DEFAULT_TASK_IDS = [7, 14, 45, 61, 62, 71, 79, 82, 88, 90, 92, 94, 98, 108, 111, 121, 122, 127, 133, 151]
 DEFAULT_METHODS = [
     "prompt_only_self_refine",
     "evaluator_feedback_retry",
     "diagnosis_only_repair",
+    "agentfixer_guided_independent_repair",
     "full_retry",
     "full_reflexion",
 ]
@@ -251,6 +253,7 @@ def build_method_prompt(
     diagnostics: list[dict[str, Any]],
     expected_files: list[str],
     attachment_context: str,
+    registry_row: dict[str, Any] | None = None,
 ) -> str:
     shared = f"""
 GTA-2 task id: {task_id}
@@ -312,6 +315,28 @@ Structured diagnosis:
 
 {shared}
 """.strip()
+    if method == "agentfixer_guided_independent_repair":
+        fix_context = {
+            "failure_type": (registry_row or {}).get("failure_type"),
+            "artifact_gate_decision": (registry_row or {}).get("artifact_gate_decision"),
+            "artifact_score": (registry_row or {}).get("artifact_score"),
+            "suggested_modules": (registry_row or {}).get("suggested_modules", []),
+            "diagnostics": diagnostics,
+        }
+        return f"""
+You are performing the AgentFixer-guided independent repair baseline.
+Use the original task, previous final answer, original input attachments/excerpts, and the AgentFixer-style failure classification below.
+Do not use Full Ours repair evaluator, evidence maps, patch-preservation controller, artifact gate decisions as filters, or non-regression gates.
+Generate an independent repaired candidate guided only by the failure class and fix recommendations.
+
+Previous final answer:
+{original_answer}
+
+AgentFixer-style failure context:
+{json.dumps(fix_context, ensure_ascii=False, indent=2)}
+
+{shared}
+""".strip()
     if method == "full_retry":
         return f"""
 You are performing the ReAct + full retry baseline in a single clean retry.
@@ -353,35 +378,44 @@ def call_gpt_json(prompt: str, image_parts: list[dict[str, Any]], model: str, ma
         default_headers["APP-Code"] = app_code or "APP-10012fcb"
     client = OpenAI(api_key=api_key, base_url=base_url, default_headers=default_headers or None)
 
-    content: str | list[dict[str, Any]]
-    if image_parts:
-        content = [{"type": "text", "text": prompt}, *image_parts]
-    else:
-        content = prompt
+    def make_content(include_images: bool) -> str | list[dict[str, Any]]:
+        if include_images and image_parts:
+            return [{"type": "text", "text": prompt}, *image_parts]
+        return prompt
 
     last_text = ""
+    last_error = ""
     for attempt in range(1, 4):
         kwargs: dict[str, Any] = {}
         if attempt == 1:
             kwargs["response_format"] = {"type": "json_object"}
-        response = client.chat.completions.create(
-            model=model,
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You generate GTA-2 baseline candidate artifacts. Return only valid JSON.",
-                },
-                {"role": "user", "content": content},
-            ],
-            temperature=0.2,
-            max_tokens=max_tokens,
-            **kwargs,
-        )
+        include_images = bool(image_parts) and attempt == 1
+        try:
+            response = client.chat.completions.create(
+                model=model,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You generate GTA-2 baseline candidate artifacts. Return only valid JSON.",
+                    },
+                    {"role": "user", "content": make_content(include_images)},
+                ],
+                temperature=0.2,
+                max_tokens=max_tokens,
+                **kwargs,
+            )
+        except Exception as exc:
+            last_error = f"{type(exc).__name__}: {exc}"
+            if image_parts and include_images:
+                continue
+            if attempt >= 3:
+                raise
+            continue
         last_text = response.choices[0].message.content or ""
         parsed = extract_first_json_object(last_text)
         if parsed is not None:
             return parsed
-    return {"final_answer_markdown": strip_code_fences(last_text), "deliverables": {}, "rationale": ["model returned non-json"]}
+    return {"final_answer_markdown": strip_code_fences(last_text), "deliverables": {}, "rationale": [f"model returned non-json; last_error={last_error}"]}
 
 
 def score_candidate_command(task_id: int, candidate_dir: Path, out: Path, scorer_model: str) -> list[str]:
@@ -464,7 +498,7 @@ def parse_methods(raw: str) -> list[str]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--task-ids", nargs="+", type=int, default=[98, 108])
+    parser.add_argument("--task-ids", nargs="*", type=int, default=DEFAULT_TASK_IDS)
     parser.add_argument("--registry", type=Path, default=DEFAULT_REGISTRY)
     parser.add_argument("--methods", default="all")
     parser.add_argument("--model", default="gpt-4o")
@@ -548,6 +582,7 @@ def main() -> None:
                 diagnostics=diagnostics,
                 expected_files=expected_files,
                 attachment_context=attach_context,
+                registry_row=row,
             )
             (method_dir / "generation_prompt.txt").write_text(prompt, encoding="utf-8")
             payload = call_gpt_json(prompt, image_parts, args.model, args.max_tokens)

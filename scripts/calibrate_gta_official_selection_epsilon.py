@@ -297,7 +297,7 @@ def score_env(model: str, base_url: str | None) -> dict[str, str]:
     opencompass_path = str((GTA_REPO / "opencompass").resolve())
     existing_pythonpath = env.get("PYTHONPATH", "")
     env["PYTHONPATH"] = opencompass_path if not existing_pythonpath else opencompass_path + os.pathsep + existing_pythonpath
-    env.setdefault("EVAL_DEBUG", "false")
+    env.setdefault("EVAL_DEBUG", "0")
     return env
 
 

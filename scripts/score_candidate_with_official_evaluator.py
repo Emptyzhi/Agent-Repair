@@ -69,7 +69,7 @@ def configure_openai_compatible_defaults() -> None:
         os.environ["OPENAI_BASE_URL"] = eval_base
         os.environ.setdefault("EVAL_OPENAI_MODEL", "deepseek-v4-pro")
         os.environ.setdefault("EVAL_DISABLE_FILE_UPLOAD", "true")
-        os.environ.setdefault("EVAL_DEBUG", "false")
+        os.environ.setdefault("EVAL_DEBUG", "0")
         return
 
     deepseek_key = first_env("DEEPSEEK_API_KEY", "deepseek_api_key")
@@ -105,7 +105,7 @@ def configure_openai_compatible_defaults() -> None:
         os.environ["EVAL_OPENAI_MODEL"] = model
         os.environ.setdefault("EVAL_DISABLE_FILE_UPLOAD", "true")
 
-    os.environ.setdefault("EVAL_DEBUG", "false")
+    os.environ.setdefault("EVAL_DEBUG", "0")
 
 
 def ensure_project_venv() -> None:

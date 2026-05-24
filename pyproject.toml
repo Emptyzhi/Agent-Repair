@@ -15,6 +15,7 @@ dependencies = [
     "reportlab>=4.5.0",
     "requests>=2.31.0",
     "tqdm>=4.64.0",
+    "evaluate>=0.4.6",
 ]
 
 [tool.uv]
